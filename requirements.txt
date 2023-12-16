@@ -35,7 +35,7 @@ msal-extensions==1.0.0
 numpy
 packaging==23.1
 pandas==2.0.3
-Pillow==10.0.0
+Pillow==10.0.1
 platformdirs==3.10.0
 portalocker==2.7.0
 prompt-toolkit==3.0.39
