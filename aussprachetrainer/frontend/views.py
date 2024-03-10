@@ -111,6 +111,9 @@ def legal_notice(request):
 def privacy_policy(request):
     return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html", css=['frontend/assets/css/legal.css'])
 
+def about_page(request):
+    return render_into_base(request, _("Über uns"), "about.html", css=['frontend/assets/css/legal.css'])
+
 
 def initiate_analysis(request):
     audio_data_url = request.POST.get('audio_data')
@@ -217,4 +220,5 @@ def text_to_speech(request):
         # audio_url starts with http://, but we want https://
         audio_url = "https://" + audio_url[7:]
         return JsonResponse({'audio_url': audio_url})
+
 

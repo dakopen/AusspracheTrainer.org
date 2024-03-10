@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import index, legal_notice, privacy_policy, initiate_analysis, check_status, \
-                   analysis_error, change_language, generate_random_sentence, robots_txt, text_to_speech
+                   analysis_error, change_language, generate_random_sentence, robots_txt, text_to_speech, \
+                   about_page
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -15,6 +16,7 @@ urlpatterns = [
     path('generate_random_sentence/', generate_random_sentence, name='generate_random_sentence'),
     path('robots.txt', robots_txt, name='robots_txt'),
     path('speech_synthesis/', text_to_speech, name='text_to_speech'),
+    path('about/', about_page, name='about'),
     # other URL patterns...
 ]
 
