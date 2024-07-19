@@ -27,6 +27,7 @@ GITHUB_TEST = os.environ.get('DJANGO_GITHUB_TEST', 'False') == 'True'
 IS_DOCKER_APP = os.environ.get('IS_DOCKER_APP', 'False') == 'True'
 ENV = os.environ.get('ENVIRONMENT', 'production')
 BETA = os.environ.get('BETA', 'False') == 'True'
+USE_AWS = os.environ.get('USE_AWS', 'False') == 'True'
 
 if DEBUG:
     sentry_sdk.init(
@@ -159,20 +160,36 @@ if DEBUG or ENV != "production" or GITHUB_TEST:
     }
 else:
     if not BETA:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': 'defaultdb',
-                'USER': 'doadmin',
-                'PASSWORD': get_secret("DO-DATABASE-PASSWORD"),
-                'HOST': 'db-postgresql-fra-docker-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
-                'PORT': '25060',
-                'OPTIONS': {
-                    'sslmode': 'require',
-                    'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+        if not USE_AWS:
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.postgresql',
+                    'NAME': 'defaultdb',
+                    'USER': 'doadmin',
+                    'PASSWORD': get_secret("DO-DATABASE-PASSWORD"),
+                    'HOST': 'db-postgresql-fra-docker-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
+                    'PORT': '25060',
+                    'OPTIONS': {
+                        'sslmode': 'require',
+                        'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+                    }
                 }
             }
-        }
+        else: # USE_AWS
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.postgresql',
+                    'NAME': 'postgres',
+                    'USER': 'dbmasteruser',
+                    'PASSWORD': get_secret("AWS-AusspracheTrainer-org-Database"),
+                    'HOST': 'ls-fcab045a8d248bddd326ff19f38620925e35807a.cfmiweyqykva.eu-central-1.rds.amazonaws.com',  # This should match the service name in docker-compose
+                    'PORT': '5432',
+                    #'OPTIONS': {
+                    #    'sslmode': 'require',
+                    #    'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+                    #}
+                }
+            }
 
     else:  # BETA
         DATABASES = {
