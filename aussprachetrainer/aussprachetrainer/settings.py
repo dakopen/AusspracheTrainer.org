@@ -264,7 +264,7 @@ LOCALE_PATHS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-if USE_AWS:
+if USE_AWS and False:  # has some trouble with font files for font-awesome and so on...
     AWS_ACCESS_KEY_ID = "AKIA47CRUZ355PV5KPF2"
     AWS_SECRET_ACCESS_KEY = get_secret('AWS-Lightsail-AusspracheTrainer-org-Storage')
     AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer-org-website'
