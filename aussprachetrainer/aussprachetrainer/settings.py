@@ -268,6 +268,7 @@ if USE_AWS:
     AWS_ACCESS_KEY_ID = "AKIA47CRUZ355PV5KPF2"
     AWS_SECRET_ACCESS_KEY = get_secret('AWS-Lightsail-AusspracheTrainer-org-Storage')
     AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer-org-website'
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
     AWS_S3_ENDPOINT_URL = 'https://s3.eu-central-1.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
