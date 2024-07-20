@@ -32,7 +32,7 @@ RUN python manage.py makemigrations && \
 RUN python manage.py compilemessages
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # create superuser if not exists
 RUN python manage.py createsuperuserifnotexists
