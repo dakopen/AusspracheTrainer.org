@@ -264,14 +264,23 @@ LOCALE_PATHS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+if USE_AWS:
+    AWS_ACCESS_KEY_ID = "AKIA47CRUZ355PV5KPF2"
+    AWS_SECRET_ACCESS_KEY = get_secret('AWS-Lightsail-AusspracheTrainer-org-Storage')
+    AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer-org-website'
+    AWS_S3_ENDPOINT_URL = 'https://s3.eu-central-1.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
 
-AWS_ACCESS_KEY_ID = get_secret('AWS-access-key-ID')
-AWS_SECRET_ACCESS_KEY = get_secret('AWS-secret-access-key')
-AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer'
-AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
+else:
+    AWS_ACCESS_KEY_ID = get_secret('AWS-access-key-ID')
+    AWS_SECRET_ACCESS_KEY = get_secret('AWS-secret-access-key')
+    AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer'
+    AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
 
 AWS_LOCATION = 'staticfiles'  # Optional: Use if you want to store files in a specific folder within your Space
 
