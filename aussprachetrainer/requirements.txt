@@ -60,7 +60,7 @@ vine==5.0.0
 virtualenv==20.24.3
 wcwidth==0.2.6
 sentry_sdk==1.40.6
-gunicorn==21.2.0
+gunicorn==22.0.0
 django-cors-headers==4.0.0
 psycopg2-binary==2.9.9
 django-celery-beat==2.5.0
